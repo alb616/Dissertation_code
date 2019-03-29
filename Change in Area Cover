@@ -1,1 +1,43 @@
+library(raster)
+# Package to handle raster-formatted spatial data
+library(rasterVis)
+# The rasterVis package complements the raster package, providing a set of methods for enhanced visualization and interaction
+library(dismo)
+# Dismo has the SDM analyses for maxent and support vector machines
+library(rgeos)
+# To define circles with a radius around the subsampled points
+library(rJava)
+# Needed to interface R and Java for maxent functions
+library(sp)
+# Used for co-ordinate reference system
+library(rgdal)
+# Used for co-ordinate reference system
+library(ncdf4)
+# Options for using NetCDF files
+library(kernlab)
+# Required for support vector machines
+library(grDevices)
+# For colouring maps
+library(colorRamps)
 
+bib<-read.csv("f_bib.csv", header = TRUE, sep = ",")
+b_bib<-read.csv("b_bib.csv", header = TRUE, sep = ",")
+
+hist(bib_vals, main = "Histogram for T.lucus Presence", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
+hist(b_bib_vals, main = "Histogram for T.lucus Presence with Barrage", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
+
+wilcox.test(bib_vals, b_bib_vals, conf.int = TRUE)
+
+median(bib_vals, na.rm = TRUE)
+median(b_bib_vals, na.rm = TRUE)
+
+p_bib<-read.csv("p_bib.csv", header = TRUE, sep = ",")
+bp_bib<-read.csv("bp_bib.csv", header = TRUE, sep = ",")
+
+hist(p_bib_vals, main = "Histogram for T.lucus Presence with Prey Species", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
+hist(bp_bib_vals, main = "Histogram for T.lucus Presence with Prey Species and Barrage", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
+
+wilcox.test(p_bib_vals, bp_bib_vals, conf.int = TRUE)
+
+median(p_bib_vals, na.rm=TRUE)
+median(bp_bib_vals, na.rm=TRUE)
