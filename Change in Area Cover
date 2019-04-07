@@ -19,25 +19,20 @@ library(kernlab)
 library(grDevices)
 # For colouring maps
 library(colorRamps)
+library(ggplot2)
 
-bib<-read.csv("f_bib.csv", header = TRUE, sep = ",")
-b_bib<-read.csv("b_bib.csv", header = TRUE, sep = ",")
+allspecies<-read.csv("no_barrage_allspecies.csv", header=TRUE, sep=",")
+b_allspecies<-read.csv("barrage_allspecies.csv", header = TRUE, sep = ",")
 
-hist(bib_vals, main = "Histogram for T.lucus Presence", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
-hist(b_bib_vals, main = "Histogram for T.lucus Presence with Barrage", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
+hist(allspecies$nobarrage, xlab = "Probability of Species Presence", border = "black", col = "cyan2")
+hist(b_allspecies$barrage, xlab = "Probability of Species Presence", border = "black", col = "cyan2")
 
-wilcox.test(bib_vals, b_bib_vals, conf.int = TRUE)
+t.test(allspecies$nobarrage, b_allspecies$barrage)
 
-median(bib_vals, na.rm = TRUE)
-median(b_bib_vals, na.rm = TRUE)
+p_allspecies<-read.csv("p_allspecies.csv", header = TRUE, sep = ",")
+bp_allspecies<-read.csv("bp_allspecies.csv", header = TRUE, sep=",")
 
-p_bib<-read.csv("p_bib.csv", header = TRUE, sep = ",")
-bp_bib<-read.csv("bp_bib.csv", header = TRUE, sep = ",")
+hist(p_allspecies$preyinc, xlab = "Probability of Species Presence", border = "black", col = "cyan2")
+hist(bp_allspecies$b_preyinc, xlab = "Probability of Species Presence", border = "black", col = "cyan2")
 
-hist(p_bib_vals, main = "Histogram for T.lucus Presence with Prey Species", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
-hist(bp_bib_vals, main = "Histogram for T.lucus Presence with Prey Species and Barrage", xlab = "Probability of T. lucus presence", border = "black", col = "cyan2", breaks = 20)
-
-wilcox.test(p_bib_vals, bp_bib_vals, conf.int = TRUE)
-
-median(p_bib_vals, na.rm=TRUE)
-median(bp_bib_vals, na.rm=TRUE)
+t.test(p_allspecies$preyinc, bp_allspecies$b_preyinc)
