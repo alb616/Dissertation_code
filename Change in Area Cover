@@ -36,3 +36,10 @@ hist(p_allspecies$preyinc, xlab = "Probability of Species Presence", border = "b
 hist(bp_allspecies$b_preyinc, xlab = "Probability of Species Presence", border = "black", col = "cyan2")
 
 t.test(p_allspecies$preyinc, bp_allspecies$b_preyinc)
+
+#violin plots 
+data <- read.csv("newallspeciesnoprey.csv",header=T)
+ggplot(data, aes(x=Barrage,y=Area_km2,fill=Barrage))+geom_violin(trim=F)+geom_boxplot(width=0.1)+scale_color_brewer(palette="Dark2")
+
+data <- read.csv("newallspecieswithprey.csv",header=T)
+ggplot(data, aes(x=Barrage,y=Area_km2,fill=Barrage))+geom_violin(trim=F)+geom_boxplot(width=0.1)+scale_color_brewer(palette="Dark2")
